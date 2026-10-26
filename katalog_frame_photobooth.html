@@ -1,223 +1,546 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Frame - Didalam Potret</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Family Inter & Plus Jakarta Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Didalam Potret — Photobooth Catalogue</title>
+
+    <!-- Google Fonts: Playfair Display, Plus Jakarta Sans, & Alex Brush for script -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f0f5ff',
-                            100: '#e0ebff',
-                            500: '#0052a5', // Warna Biru Didalam Potret
-                            600: '#004287',
-                            700: '#0d3b66',
-                            dark: '#0a192f'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Aspect Ratio khusus untuk strip photobooth vertikal */
-        .aspect-strip {
-            aspect-ratio: 2 / 3;
-        }
-    </style>
-</head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
-    <!-- Header & Navigation -->
-    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo Didalam Potret -->
-                <div class="flex items-center gap-3">
-                    <img src="img/Logo_DidalamPotret.png" alt="Didalam Potret Logo" class="h-8 sm:h-10 md:h-12 w-auto object-contain">
-                </div>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header / Navbar -->
+    <!-- Navbar Minimalis Modern -->
+    <header class="navbar">
+      <div class="container nav-container">
+        <!-- Logo Brand -->
+        <a href="#" class="logo-brand">
+          <span class="logo-text">Didalam Potret</span>
+        </a>
 
-                <!-- Contact / Call to Action -->
-                <a href="https://www.instagram.com/didalam.potret/" target="_blank" class="inline-flex items-center gap-2 bg-gradient-to-r from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] hover:opacity-90 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-sm hover:shadow-md hover:scale-105">
-                    <i class="fa-brands fa-instagram text-lg"></i>
-                    <span class="hidden sm:inline">Follow Us</span>
-                </a>
-            </div>
+        <!-- Menu Links -->
+        <nav class="nav-links">
+          <a href="#whatson">What's on</a>
+          <a href="#catalogue">Frames</a>
+          <a href="#booths">Booths</a>
+          <a href="#events">Private events</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <!-- Tombol Book Kapsul Kanan -->
+        <div class="nav-actions">
+          <a
+            href="https://wa.me/6281234567890"
+            target="_blank"
+            class="btn-book-nav"
+          >
+            Book an event
+          </a>
         </div>
+      </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-b from-white via-slate-50 to-slate-100 py-10 sm:py-14 border-b border-slate-200/60">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <span class="inline-block px-4 py-1.5 rounded-full bg-brand-50 text-brand-600 text-xs font-bold tracking-wide uppercase mb-3 border border-brand-100">Our Collection</span>
-            <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Choose Your Photobooth Frame</h1>
-            <p class="mt-3 text-slate-600 text-sm sm:text-base max-w-xl mx-auto">Pick your favorite Didalam Potret frame for your special moments.</p>
+    <!-- HERO / HEADER SECTION (CLEAN PURPLE & ORANGE STYLE) -->
+    <!-- HERO / HEADER SECTION (GAYA ILLUSTRATION & CAPSULE PILL) -->
+     <!-- HERO SECTION (ILUSTRASI TANGAN MEGANG STRIP & FONT PLAYFAIR) -->
+<!-- HERO / HEADER SECTION -->
+<!-- HERO / HEADER SECTION (TANPA TANGAN, HANYA STRIP FOTO KIRI & KANAN) -->
+<!-- HERO HEADER SECTION -->
+<section class="hero-section">
+    <!-- Strip Foto Kiri -->
+    <div class="hero-strip-side strip-left">
+        <div class="held-strip s-1">
+            <img src="img/strip-3.jpg" alt="Photo Strip 1">
         </div>
-    </section>
-
-    <!-- Main Content Grid -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
-        <!-- Frame Grid (Flexibel & Responsive) -->
-        <div id="frameGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
-            <!-- Items akan di-generate oleh JavaScript -->
-        </div>
-    </main>
-
-    <!-- Modal Detail Frame / Preview -->
-    <div id="detailModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" onclick="closeModalOnBackdrop(event)">
-        <div class="bg-white rounded-3xl max-w-sm w-full overflow-hidden shadow-2xl transition-all transform scale-95 opacity-0 duration-200 relative" id="modalCard">
-            <!-- Modal Header -->
-            <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-                <h3 class="font-bold text-slate-800 text-sm">Preview Frame</h3>
-                <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-white hover:bg-slate-200 border border-slate-200 flex items-center justify-center text-slate-500 transition-all">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            
-            <!-- Modal Body / Frame Preview -->
-            <div class="p-5 bg-slate-100 flex justify-center items-center">
-                <div class="relative bg-white p-2 rounded-2xl shadow-md border border-slate-200 max-h-[70vh] overflow-hidden flex items-center justify-center">
-                    <img id="modalImage" src="" alt="Frame Preview" class="max-h-[65vh] w-auto object-contain rounded-lg">
-                </div>
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="p-4 bg-white border-t border-slate-100 flex gap-2">
-                <button onclick="closeModal()" class="flex-1 py-3 rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50 transition-all">Close</button>
-            </div>
+        <div class="held-strip s-2">
+            <img src="img/strip-5.jpg" alt="Photo Strip 2">
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-8">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="font-extrabold text-brand-500 text-base mb-1">DIDALAM POTRET PHOTOBOOTH</div>
-            <p class="text-xs text-slate-400">&copy; 2026 Didalam Potret. All rights reserved.</p>
+    <!-- Konten Tengah Presisi -->
+    <div class="container hero-center-content">
+        <!-- Top Camera Badge -->
+        <div class="top-camera-pill">
+            <span class="cam-icon">📷</span>
+            <span class="cam-text">capture your best vibe</span>
         </div>
+
+        <!-- Title Utama -->
+        <h1 class="hero-title-serif">
+            The Sweetest <span class="pill-badge-inline">Moments</span> <br>
+            <span class="italic-highlight-wrapper"><span class="italic-highlight">Didalam Potret</span><svg class="zigzag-svg" viewBox="0 0 100 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 6L10 2L20 10L30 2L40 10L50 2L60 10L70 2L80 10L90 2L100 6" stroke="#FF69B4" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+        </h1>
+
+        <!-- Deskripsi -->
+        <p class="hero-description">
+            Pilih frame aesthetic favoritmu, gaya sepuasnya bareng bestie, dan cetak memori manis langsung di photobooth & studio 'Didalam Potret'.
+        </p>
+
+        <!-- Tombol CTA -->
+        <div class="hero-cta-buttons">
+            <a href="https://wa.me/6281234567890" target="_blank" class="btn-hero-primary">
+                <i class="fab fa-whatsapp"></i> Book a Session <span class="btn-arrow">→</span>
+            </a>
+            <a href="#catalogue" class="btn-hero-secondary">
+                <span class="frame-icon">🖼️</span> Explore Frames
+            </a>
+        </div>
+
+        <!-- Indikator Fitur Bawah -->
+        <div class="hero-features-list">
+            <span class="feature-item"><i class="fas fa-check-circle"></i> High–Gloss Prints</span>
+            <span class="feature-item"><i class="fas fa-check-circle"></i> Free Softcopy GIF</span>
+            <span class="feature-item"><i class="fas fa-check-circle"></i> 40+ Custom Frames</span>
+        </div>
+    </div>
+
+    <!-- Strip Foto Kanan -->
+    <div class="hero-strip-side strip-right">
+        <div class="held-strip s-1">
+            <img src="img/strip-2.jpg" alt="Photo Strip 3">
+        </div>
+        <div class="held-strip s-2">
+            <img src="img/strip-7.jpg" alt="Photo Strip 4">
+        </div>
+    </div>
+</section>
+    <!-- Marquee Berjalan Tepat di Bawah Header -->
+    <div class="announcement-marquee">
+      <div class="marquee-track">
+        <!-- Konten Marquee (Diulang 2x agar animasi infinite loop mulus tanpa jeda) -->
+        <span class="marquee-item"
+          >2 SESSIONS = 1 FREE KEYCHAIN <i class="fas fa-heart"></i
+        ></span>
+        <span class="marquee-item"
+          >11 BRANCHES • 8 CITIES <i class="fas fa-heart"></i
+        ></span>
+        <span class="marquee-item"
+          >THE OG FRAMES ARE BACK <i class="fas fa-heart"></i
+        ></span>
+        <span class="marquee-item"
+          >BEDAZZLE YOUR STRIP <i class="fas fa-heart"></i
+        ></span>
+        <span class="marquee-item"
+          >A FREE SESSION ON YOUR BIRTHDAY <i class="fas fa-heart"></i
+        ></span>
+
+        <!-- Duplikasi untuk infinite loop -->
+        <span class="marquee-item"
+          >2 SESSIONS = 1 FREE KEYCHAIN <i class="fas fa-heart"></i
+        ></span>
+        <span class="marquee-item"
+          >11 BRANCHES • 8 CITIES <i class="fas fa-heart"></i
+        ></span>
+        <span class="marquee-item"
+          >THE OG FRAMES ARE BACK <i class="fas fa-heart"></i
+        ></span>
+        <span class="marquee-item"
+          >BEDAZZLE YOUR STRIP <i class="fas fa-heart"></i
+        ></span>
+        <span class="marquee-item"
+          >A FREE SESSION ON YOUR BIRTHDAY <i class="fas fa-heart"></i
+        ></span>
+      </div>
+    </div>
+
+    <!-- SECTION INTERAKTIF: FRAME DIGANTUNG & MESIN PRINTER PHOTOBOOTH -->
+    <!-- SECTION INTERAKTIF: EXACT LAYOUT CORRECTION -->
+    <section id="hanging-frames" class="boothy-interactive-section">
+      <div class="container">
+        <div class="boothy-showcase-grid">
+          <!-- KOLOM KIRI: Teks Judul + Gantungan Foto (Menempel Dekat & Rata) -->
+          <div class="boothy-left-column">
+            <!-- Teks Judul Ditaruh Di Sini -->
+            <div class="boothy-header">
+              <p class="script-subtitle">frames are waiting for you</p>
+              <h2 class="main-boothy-title">40+ frames, 10+ layouts</h2>
+              <p class="boothy-desc">
+                Tap salah satu strip foto gantung di bawah untuk mencetak &
+                melihat preview langsung di mesin printer photobooth!
+              </p>
+            </div>
+
+            <!-- Tali Gantung Foto -->
+            <div class="clothesline-wrapper">
+              <div class="rope-line"></div>
+              <div id="hangingRopeGrid" class="hanging-rope-grid">
+                <!-- Items generated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- KOLOM KANAN: Mesin Printer Photobooth -->
+          <div class="printer-booth-wrapper">
+            <!-- Kepala Mesin Kapsul -->
+            <div class="printer-machine">
+              <div class="slot-light"></div>
+              <div class="printer-slot"></div>
+            </div>
+
+            <!-- Foto Keluar dari Slot -->
+            <div class="printed-paper-container">
+              <div
+                class="printed-strip-card print-animation"
+                id="printedStripCard"
+              >
+                <img
+                  id="printedImage"
+                  src="img/strip-1.png"
+                  alt="Printed Strip"
+                />
+              </div>
+            </div>
+
+            <!-- Judul & Tombol Order -->
+            <div class="printer-footer">
+              <div class="printed-title" id="printedFrameTitle">
+                Frame #1 — Zebra
+              </div>
+              <button
+                class="btn-print-order"
+                onclick="bookCurrentPrintedFrame()"
+              >
+                <i class="fab fa-whatsapp"></i> Order Frame Ini
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="booth-journey-section" id="booths">
+      <div class="container">
+        <div class="journey-grid-layout">
+          <!-- KOLOM KIRI: STRIP FOTO & SUBTITLE -->
+          <div class="journey-left-column">
+            <div class="hanging-strips-stack">
+              <img
+                src="img/strip-1.jpg"
+                alt="Memory Strip 1"
+                class="stack-img img-1"
+              />
+              <img
+                src="img/strip-2.jpg"
+                alt="Memory Strip 2"
+                class="stack-img img-2"
+              />
+            </div>
+            <div class="journey-script-tag">
+              <em>creating memories</em>
+              <h3>everywhere</h3>
+            </div>
+          </div>
+
+          <!-- KOLOM KANAN: HEADER & FILTER & CAROUSEL TIKET -->
+          <div class="journey-right-column">
+            <div class="journey-header">
+              <span class="journey-subtitle">where we’ve been</span>
+              <h2 class="journey-title">Find Our Booths & Pop-Ups</h2>
+              <span class="journey-counter">8 of 11 spots open today</span>
+            </div>
+
+            <!-- Filter Pill Kota -->
+            <div class="city-filter-wrapper">
+              <button class="city-pill active" onclick="filterCity('all')">
+                All
+              </button>
+              <button class="city-pill" onclick="filterCity('jakarta')">
+                Jakarta
+              </button>
+              <button class="city-pill" onclick="filterCity('depok')">
+                Depok
+              </button>
+              <button class="city-pill" onclick="filterCity('bandung')">
+                Bandung
+              </button>
+              <button class="city-pill" onclick="filterCity('surabaya')">
+                Surabaya
+              </button>
+              <button class="city-pill" onclick="filterCity('pop-up')">
+                Special Pop-Up
+              </button>
+            </div>
+
+            <!-- Carousel Tiket Lokasi -->
+            <div class="tickets-carousel-container">
+              <div class="tickets-track" id="ticketsTrack">
+                <!-- Tiket 1 -->
+                <div class="ticket-card" data-city="jakarta">
+                  <div class="ticket-notch top"></div>
+                  <div class="ticket-header">
+                    <span class="badge-city">JAKARTA</span>
+                    <span class="badge-status open">• Open till 10 PM</span>
+                  </div>
+                  <h4 class="ticket-venue">Etera, Tebet</h4>
+                  <p class="ticket-hours">
+                    <i class="far fa-clock"></i> 10.00 - 22.00 WIB
+                  </p>
+                  <div class="ticket-footer">
+                    <span class="ticket-price">Rp 35k / session</span>
+                    <a
+                      href="https://maps.google.com"
+                      target="_blank"
+                      class="btn-ticket-dir"
+                      ><i class="fas fa-location-arrow"></i> Directions</a
+                    >
+                  </div>
+                  <div class="ticket-notch bottom"></div>
+                </div>
+
+                <!-- Tiket 2 -->
+                <div class="ticket-card" data-city="jakarta">
+                  <div class="ticket-notch top"></div>
+                  <div class="ticket-header">
+                    <span class="badge-city">JAKARTA</span>
+                    <span class="badge-status open">• Open till 11 PM</span>
+                  </div>
+                  <h4 class="ticket-venue">Walking Drum, Ancol</h4>
+                  <p class="ticket-hours">
+                    <i class="far fa-clock"></i> 08.00 - 23.00 WIB
+                  </p>
+                  <div class="ticket-footer">
+                    <span class="ticket-price">Rp 40k / session</span>
+                    <a
+                      href="https://maps.google.com"
+                      target="_blank"
+                      class="btn-ticket-dir"
+                      ><i class="fas fa-location-arrow"></i> Directions</a
+                    >
+                  </div>
+                  <div class="ticket-notch bottom"></div>
+                </div>
+
+                <!-- Tiket 3 -->
+                <div class="ticket-card" data-city="bandung">
+                  <div class="ticket-notch top"></div>
+                  <div class="ticket-header">
+                    <span class="badge-city">BANDUNG</span>
+                    <span class="badge-status open">• Open till 10 PM</span>
+                  </div>
+                  <h4 class="ticket-venue">One Eighty Coffee, Dago</h4>
+                  <p class="ticket-hours">
+                    <i class="far fa-clock"></i> 09.00 - 22.00 WIB
+                  </p>
+                  <div class="ticket-footer">
+                    <span class="ticket-price">Rp 35k / session</span>
+                    <a
+                      href="https://maps.google.com"
+                      target="_blank"
+                      class="btn-ticket-dir"
+                      ><i class="fas fa-location-arrow"></i> Directions</a
+                    >
+                  </div>
+                  <div class="ticket-notch bottom"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigasi Panah Carousel Tiket -->
+            <div class="carousel-controls">
+              <button class="btn-nav-ticket" onclick="scrollTickets(-1)">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="btn-nav-ticket" onclick="scrollTickets(1)">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <span class="control-hint"
+                >Tap a ticket for location details</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catalogue Grid Section (Pencarian Semua Frame) -->
+    <section id="frames" class="frames-section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Semua Katalog Frame</h2>
+            <p class="section-desc">
+              Cari dan lihat seluruh koleksi frame lengkap Didalam Potret.
+            </p>
+          </div>
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Cari nomor frame..."
+              onkeyup="filterFrames()"
+            />
+          </div>
+        </div>
+
+        <div id="frameGrid" class="frame-grid">
+          <!-- Frame Cards di-generate via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION LOKASI / JEJAK EVENT (OUR JOURNEY & BOOTHS) -->
+
+    <!-- Packages Pricing Section -->
+    <section id="packages" class="packages-section">
+      <div class="container">
+        <div
+          class="section-header text-center"
+          style="display: block; margin-bottom: 40px"
+        >
+          <h2 class="section-title">Investasi Momen Berharga</h2>
+          <p class="section-desc">
+            Pilihan paket photobooth fleksibel sesuai kebutuhan acaramu.
+          </p>
+        </div>
+
+        <div class="packages-grid">
+          <div class="package-card">
+            <span class="package-tag">Essential</span>
+            <h3 class="package-name">2 Jam Unlimited</h3>
+            <div class="package-price">Rp 1.x00.000</div>
+            <ul class="package-list">
+              <li>
+                <i class="fa-solid fa-check"></i> Cetak foto unlimited
+                berkualitas tinggi
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> Desain template frame custom
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> Studio lighting & equipment
+                professional
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> Aksesoris & fun props lengkap
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> Softcopy via QR Code digital
+              </li>
+            </ul>
+            <button
+              onclick="bookPackage('2 Jam Unlimited')"
+              class="btn-package"
+            >
+              Pilih Paket Ini
+            </button>
+          </div>
+
+          <div class="package-card featured">
+            <span class="package-tag popular">Most Loved ★</span>
+            <h3 class="package-name">3 Jam Unlimited</h3>
+            <div class="package-price">Rp 2.x00.000</div>
+            <ul class="package-list">
+              <li>
+                <i class="fa-solid fa-check"></i> Seluruh fasilitas paket 2 jam
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> Durasi acara lebih panjang (3
+                jam full)
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> 2 Crew & operator standby
+                ramah
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> Free custom overlay design
+              </li>
+            </ul>
+            <button
+              onclick="bookPackage('3 Jam Unlimited')"
+              class="btn-package-primary"
+            >
+              Pilih Paket Ini
+            </button>
+          </div>
+
+          <div class="package-card">
+            <span class="package-tag">Custom / VVIP</span>
+            <h3 class="package-name">Special Event</h3>
+            <div class="package-price">Custom Price</div>
+            <ul class="package-list">
+              <li>
+                <i class="fa-solid fa-check"></i> Durasi fleksibel menyesuaikan
+                rundown
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> Custom backdrop & branding
+                event
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> Guestbook album kenangan
+                eksklusif
+              </li>
+              <li>
+                <i class="fa-solid fa-check"></i> Dedicated priority technical
+                support
+              </li>
+            </ul>
+            <button onclick="bookPackage('Custom Event')" class="btn-package">
+              Konsultasikan Kebutuhan
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal Detail Frame -->
+    <div
+      id="detailModal"
+      class="modal-overlay hidden"
+      onclick="closeModalOnBackdrop(event)"
+    >
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="modalFrameTitle" class="modal-title">Preview Frame</h3>
+          <button onclick="closeModal()" class="btn-close">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-img-container">
+            <img id="modalImage" src="" alt="Frame Preview" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button onclick="closeModal()" class="btn-modal-cancel">Tutup</button>
+          <button onclick="bookCurrentFrame()" class="btn-modal-book">
+            <i class="fa-brands fa-whatsapp"></i> Pesan Frame Ini via WA
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a
+      href="#"
+      onclick="openGeneralBooking()"
+      class="floating-wa"
+      title="Chat WhatsApp"
+    >
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-brand">Didalam Potret Photobooth</div>
+        <p>&copy; 2026 Didalam Potret. All rights reserved.</p>
+      </div>
     </footer>
 
-    <!-- Script Data & Logic -->
-    <script>
-        /*
-          PETUNJUK UPLOAD FRAME:
-          Cukup ganti URL gambar di bawah ini dengan file PNG frame milik Anda.
-          Contoh: "image": "images/frame1.png" atau "https://domain-anda.com/frame1.png"
-        */
-        const framesData = [
-            { id: 1, image: "img/1.png" },
-            { id: 2, image: "img/2.png" },
-            { id: 3, image: "img/3.png" },
-            { id: 4, image: "img/4.png" },
-            { id: 5, image: "img/5.png" },
-            { id: 6, image: "img/6.png" },
-            { id: 7, image: "img/7.png" },
-            { id: 9, image: "img/9.png" },
-            { id: 10, image: "img/10.png" },
-            { id: 11, image: "img/11.png" },
-            { id: 12, image: "img/12.png" },
-            { id: 13, image: "img/13.png" },
-            { id: 14, image: "img/14.png" },
-            { id: 15, image: "img/15.png" },
-            { id: 16, image: "img/16.png" },
-            { id: 17, image: "img/17.png" },
-            { id: 18, image: "img/18.png" },
-            { id: 19, image: "img/19.png" },
-            { id: 20, image: "img/20.png" },
-            { id: 21, image: "img/21.png" },
-            { id: 22, image: "img/22.png" },
-            { id: 23, image: "img/23.png" },
-            { id: 24, image: "img/24.png" },
-            { id: 25, image: "img/25.png" },
-            { id: 26, image: "img/26.png" },
-            { id: 27, image: "img/27.png" },
-            { id: 28, image: "img/28.png" },
-            { id: 29, image: "img/29.png" },
-            { id: 30, image: "img/30.png" },
-            { id: 31, image: "img/31.png" },
-            { id: 32, image: "img/32.png" },
-            { id: 33, image: "img/33.png" },
-            { id: 34, image: "img/34.png" },
-            { id: 35, image: "img/35.png" },
-            { id: 36, image: "img/36.png" },
-            { id: 37, image: "img/37.png" },
-            { id: 38, image: "img/38.png" },
-            { id: 39, image: "img/39.png" },
-            { id: 40, image: "img/40.png" },
-            { id: 41, image: "img/41.png" },
-        ];
-
-        // Render Semua Frame ke dalam Grid
-        function renderFrames() {
-            const grid = document.getElementById('frameGrid');
-            grid.innerHTML = '';
-
-            framesData.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = "group bg-white rounded-2xl p-2.5 sm:p-3 border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col items-center";
-                card.onclick = () => openModal(item, index + 1);
-
-                card.innerHTML = `
-                    <div class="relative w-full aspect-strip bg-slate-50 rounded-xl overflow-hidden border border-slate-100 flex items-center justify-center p-1">
-                        <img src="${item.image}" alt="Frame Photobooth ${index + 1}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300">
-                        <div class="absolute inset-0 bg-brand-700/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <span class="bg-white/95 text-brand-700 text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
-                                <i class="fa-solid fa-eye text-brand-500"></i> Show Detail
-                            </span>
-                        </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // Fungsi Modal Preview Detail
-        function openModal(item, frameNumber) {
-            const modal = document.getElementById('detailModal');
-            const modalCard = document.getElementById('modalCard');
-            
-            document.getElementById('modalImage').src = item.image;
-
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modalCard.classList.remove('scale-95', 'opacity-0');
-                modalCard.classList.add('scale-100', 'opacity-100');
-            }, 10);
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('detailModal');
-            const modalCard = document.getElementById('modalCard');
-            
-            modalCard.classList.remove('scale-100', 'opacity-100');
-            modalCard.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 200);
-        }
-
-        function closeModalOnBackdrop(event) {
-            if (event.target.id === 'detailModal') {
-                closeModal();
-            }
-        }
-
-        // Jalankan saat halaman dimuat
-        window.onload = () => {
-            renderFrames();
-        };
-    </script>
-</body>
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+  </body>
 </html>
