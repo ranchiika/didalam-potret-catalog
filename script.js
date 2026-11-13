@@ -1,245 +1,153 @@
-/* ===================================================
-   CONFIG & DATA (DENGAN DUKUNGAN STRIP IMAGE PATH)
-   =================================================== */
-
-// Ganti nomor WhatsApp Anda di sini (Format 62...)
-const WA_NUMBER = "6281234567890"; 
-
-// Data Frame (image = untuk katalog, stripImage = khusus untuk hanger & printer)
-const framesData = [
-    { 
-        id: 1, 
-        name: "Frame #1 — Zebra", 
-        image: "img/1.png", 
-        stripImage: "img/strip-1.jpg" // Path khusus untuk hanger & printer
-    },
-    { 
-        id: 2, 
-        name: "Frame #2 — Fawn Print", 
-        image: "img/2.png", 
-        stripImage: "img/strip-2.jpg" 
-    },
-    { 
-        id: 3, 
-        name: "Frame #3 — Baddest in Jakarta", 
-        image: "img/3.png", 
-        stripImage: "img/strip-3.jpg" 
-    },
-    { 
-        id: 4, 
-        name: "Frame #4 — Classic Sepia", 
-        image: "img/4.png", 
-        stripImage: "img/strip-5.jpg" 
-    },
-    { 
-        id: 5, 
-        name: "Frame #5 — Two-Shot B&W", 
-        image: "img/5.jpg", 
-        stripImage: "img/strip-4.jpg" 
-    },
-    { 
-        id: 6, 
-        name: "Frame #6 — Baddest, Black", 
-        image: "img/6.jpg", 
-        stripImage: "img/strip-6.jpg" 
-    },
-    { 
-        id: 7, 
-        name: "Frame #7 — Nine-Up Grid", 
-        image: "img/7.jpg", 
-        stripImage: "img/strip-7.jpg" 
-    },
-  
-    
-   
-];
-
-let currentLoopIndex = 0;
-let autoPrintInterval = null;
-let selectedPrintedFrame = framesData[0];
-let selectedFrameIdModal = null;
-
-/* ===================================================
-   AUTO-LOOPING PRINTER LOGIC
-   =================================================== */
-
-function printFrameToMachine(frameItem) {
-    selectedPrintedFrame = frameItem;
-
-    const card = document.getElementById('printedStripCard');
-    const img = document.getElementById('printedImage');
-    const title = document.getElementById('printedFrameTitle');
-
-    if (!card || !img || !title) return;
-
-    card.classList.remove('print-animation');
-    void card.offsetWidth; 
-
-    // Menggunakan stripImage untuk mesin printer, fallback ke image utama jika stripImage kosong
-    img.src = frameItem.stripImage ? frameItem.stripImage : frameItem.image;
-    title.innerText = frameItem.name;
-    
-    card.classList.add('print-animation');
+/* ================= WHATSAPP =================
+   Semua kategori sekarang masuk ke nomor yang sama (WA_DEFAULT).
+   Mau pisah nomor per kategori? Isi "number" di kategori itu,
+   misalnya number: "62812xxxxxxx". Kosongkan untuk pakai WA_DEFAULT. */
+const WA_DEFAULT = "6282111947584";
+const CHAT = {
+  event: {
+    number: "",
+    text: "Halo Didalam Potret! 👋\nSaya mau sewa photobooth untuk *private event*.\n\nJenis acara:\nTanggal:\nLokasi:\nJumlah tamu:\nPaket yang diminati:"
+  },
+  partner: {
+    number: "",
+    text: "Halo Didalam Potret! 👋\nSaya tertarik untuk *kerja sama / partnership*.\n\nNama brand / instansi:\nBentuk kolaborasi:\nTanggal / periode:"
+  },
+  admin: {
+    number: "",
+    text: "Halo Didalam Potret! 👋\nSaya mau tanya-tanya dulu ke admin."
+  },
+  package: {
+    number: "",
+    text: (nama) => `Halo Didalam Potret! 👋\nSaya mau tanya ketersediaan jadwal untuk *Paket ${nama}*.\n\nTanggal acara:\nLokasi:`
+  }
+};
+const $ = (id) => document.getElementById(id);
+function waLink(key, arg) {
+  const c = CHAT[key] || CHAT.admin;
+  const text = typeof c.text === "function" ? c.text(arg) : c.text;
+  return `https://wa.me/${c.number || WA_DEFAULT}?text=${encodeURIComponent(text)}`;
 }
 
-function startAutoPrinterLoop() {
-    stopAutoPrinterLoop(); 
-    
-    autoPrintInterval = setInterval(() => {
-        currentLoopIndex = (currentLoopIndex + 1) % framesData.length;
-        const nextFrame = framesData[currentLoopIndex];
-        
-        updateHangingActiveState(nextFrame.id);
-        printFrameToMachine(nextFrame);
-    }, 3500); 
+/* ---- Properti: strip foto, polaroid, selotip, paperclip ---- */
+const CLIP = '<svg class="clip" viewBox="0 0 18 42" aria-hidden="true"><path d="M5 30V9a4 4 0 0 1 8 0v24a6 6 0 0 1-12 0V12"/></svg>';
+function loadImg(box, srcs) {
+  const im = new Image(); let i = 0;
+  im.alt = "";
+  im.onerror = () => { i++; if (i < srcs.length) im.src = srcs[i]; else im.remove(); };
+  im.src = srcs[0];
+  box.appendChild(im);
+}
+function makeStrip(src, pal, w) {
+  const s = document.createElement("div");
+  s.className = "strip " + pal;
+  s.style.setProperty("--w", w + "px");
+  for (let i = 0; i < 4; i++) { const d = document.createElement("i"); d.className = "slot"; s.appendChild(d); }
+  if (src) loadImg(s, [src]);
+  return s;
+}
+function stripProp(o) {
+  const d = document.createElement("div");
+  d.className = "prop strip-prop";
+  d.style.cssText = `left:${o.l}%; top:${o.t}px; --r:${o.r}deg;`;
+  if (o.deco === "tape") d.insertAdjacentHTML("beforeend", `<span class="tape ${o.tape || ""}"></span>`);
+  if (o.deco === "clip") d.insertAdjacentHTML("beforeend", CLIP);
+  d.appendChild(makeStrip(o.src, o.pal, o.w));
+  return d;
+}
+function polaProp(o) {
+  const d = document.createElement("div");
+  d.className = "prop pola";
+  d.style.cssText = `left:${o.center ? `calc(50% - ${o.w / 2}px)` : o.l + "%"}; top:${o.t}px; width:${o.w}px; --r:${o.r}deg;`;
+  d.innerHTML = `<div class="ph"><i class="sil"></i></div><span class="cap">${o.cap}</span>`;
+  if (o.deco === "tape") d.insertAdjacentHTML("afterbegin", `<span class="tape ${o.tape || ""}"></span>`);
+  if (o.deco === "clip") d.insertAdjacentHTML("beforeend", CLIP);
+  loadImg(d.querySelector(".ph"), o.srcs);
+  return d;
 }
 
-function stopAutoPrinterLoop() {
-    if (autoPrintInterval) {
-        clearInterval(autoPrintInterval);
-        autoPrintInterval = null;
-    }
-}
+/* ---- Hero: satu foto di tengah (taruh foto pilihanmu di img/header.jpg) ---- */
+$("collage").appendChild(polaProp({
+  center: true, t: 18, w: 232, r: -3, cap: "capture your best vibe",
+  srcs: ["img/header.jpg", "img/photo-1.jpg", "img/strip-1.jpg"], deco: "tape", tape: "pink"
+}));
 
-function updateHangingActiveState(frameId) {
-    document.querySelectorAll('.hanging-item').forEach(el => {
-        if (el.dataset.id == frameId) {
-            el.classList.add('active');
-        } else {
-            el.classList.remove('active');
-        }
-    });
-}
-
-/* ===================================================
-   RENDER HANGING ROPE FRAMES
-   =================================================== */
-
-function renderHangingFrames() {
-    const ropeContainer = document.getElementById('hangingRopeGrid');
-    if (!ropeContainer) return;
-    ropeContainer.innerHTML = '';
-
-    const hangingList = framesData.slice(0, 10);
-
-    hangingList.forEach((item, index) => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = `hanging-item ${index === 0 ? 'active' : ''}`;
-        itemDiv.dataset.id = item.id;
-        
-        itemDiv.onclick = () => {
-            currentLoopIndex = framesData.findIndex(f => f.id === item.id);
-            updateHangingActiveState(item.id);
-            printFrameToMachine(item);
-            startAutoPrinterLoop();
-        };
-
-        // Menggunakan stripImage untuk gambar di gantungan tali
-        const displayImg = item.stripImage ? item.stripImage : item.image;
-
-        itemDiv.innerHTML = `
-            <div class="peg-clip-wrapper">
-                <div class="peg-clip-custom">
-                    <span class="peg-spring"></span>
-                </div>
-            </div>
-            <div class="hanging-strip">
-                <img src="${displayImg}" alt="${item.name}" loading="lazy">
-            </div>
-            <span class="hanging-label">Frame #${item.id}</span>
-        `;
-
-        ropeContainer.appendChild(itemDiv);
-    });
-}
-
-function bookCurrentPrintedFrame() {
-    if (!selectedPrintedFrame) return;
-    const message = `Halo Didalam Potret! 👋%0ASaya mau pesan photobooth dengan pilihan *${selectedPrintedFrame.name}*.%0ABoleh minta info ketersediaan tanggal & pricelist?`;
-    window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
-}
-
-/* ===================================================
-   RENDER ALL CATALOGUE GRID & SEARCH
-   =================================================== */
-
-function renderCatalogueFrames(data = framesData) {
-    const grid = document.getElementById('frameGrid');
-    if (!grid) return;
-    grid.innerHTML = '';
-
-    if (data.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: #5A6A7E;">Frame tidak ditemukan.</p>`;
-        return;
-    }
-
-    data.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'frame-card';
-        card.onclick = () => openModal(item);
-
-        // Katalog tetap menggunakan gambar utama (item.image)
-        card.innerHTML = `
-            <div class="aspect-strip">
-                <img src="${item.image}" alt="Frame #${item.id}" loading="lazy">
-            </div>
-            <div class="frame-info">
-                <span class="frame-name">Frame #${item.id}</span>
-                <span class="btn-preview-tag">Preview</span>
-            </div>
-        `;
-        grid.appendChild(card);
-    });
-}
-
-function filterFrames() {
-    const query = document.getElementById('searchInput').value.trim().toLowerCase();
-    const filtered = framesData.filter(item => item.id.toString().includes(query));
-    renderCatalogueFrames(filtered);
-}
-
-/* ===================================================
-   MODAL LOGIC & WA BOOKING
-   =================================================== */
-
-function openModal(item) {
-    selectedFrameIdModal = item.id;
-    document.getElementById('modalFrameTitle').innerText = `Preview Frame #${item.id}`;
-    document.getElementById('modalImage').src = item.image;
-    document.getElementById('detailModal').classList.remove('hidden');
-}
-
-function closeModal() {
-    document.getElementById('detailModal').classList.add('hidden');
-}
-
-function closeModalOnBackdrop(event) {
-    if (event.target.id === 'detailModal') {
-        closeModal();
-    }
-}
-
-function bookCurrentFrame() {
-    if (!selectedFrameIdModal) return;
-    const message = `Halo Didalam Potret! 👋%0ASaya tertarik menggunakan *Frame #${selectedFrameIdModal}*.%0ABoleh minta info price list dan ketersediaan tanggalnya?`;
-    window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
-}
-
-function bookPackage(packageName) {
-    const message = `Halo Didalam Potret! 👋%0ASaya mau tanya ketersediaan jadwal untuk *Paket ${packageName}*.`;
-    window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
-}
-
-function openGeneralBooking() {
-    const message = `Halo Didalam Potret! 👋%0ASaya mau konsultasi jadwal photobooth untuk event saya.`;
-    window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
-}
-
-/* Initial Load */
-document.addEventListener('DOMContentLoaded', () => {
-    renderHangingFrames();
-    renderCatalogueFrames();
-    
-    printFrameToMachine(framesData[0]);
-    startAutoPrinterLoop();
+/* ---- Tombol WhatsApp ---- */
+document.querySelectorAll("[data-chat]").forEach((a) => { a.href = waLink(a.dataset.chat); });
+document.querySelectorAll("[data-pkg]").forEach((b) => {
+  b.onclick = () => window.open(waLink("package", b.dataset.pkg), "_blank");
 });
+const row = $("pkgRow"), dots = [...$("pkgDots").children];
+row.addEventListener("scroll", () => {
+  const i = Math.round(row.scrollLeft / (row.scrollWidth / 3));
+  dots.forEach((d, k) => d.classList.toggle("on", k === i));
+}, { passive: true });
+
+/* ---- Event (CONTOH: ganti dengan data asli) ---- */
+const events = [
+  { date: "12 Okt", name: "Wedding Rina & Dimas", place: "Serpong, Tangsel",   city: "Tangsel", type: "Wedding",     pkg: "Golden 5 jam" },
+  { date: "28 Sep", name: "Dies Natalis Kampus",  place: "BSD, Tangsel",       city: "Tangsel", type: "Kampus",      pkg: "Silver 3 jam" },
+  { date: "14 Sep", name: "Gathering Kantor",     place: "Sudirman, Jakarta",  city: "Jakarta", type: "Corporate",   pkg: "Silver 3 jam" },
+  { date: "30 Agu", name: "Bazar Komunitas",      place: "Depok",              city: "Depok",   type: "Bazar",       pkg: "Basic 3 jam" },
+  { date: "09 Agu", name: "Birthday Nadia",       place: "Bintaro",            city: "Bintaro", type: "Ulang tahun", pkg: "Silver 3 jam" }
+];
+$("eventList").innerHTML = events.map((e) => `
+  <article class="ev-card">
+    <div class="ev-top">
+      <h3 class="ev-name">${e.name}</h3>
+      <span class="ev-date">${e.date}</span>
+    </div>
+    <p class="ev-place">${e.place}</p>
+    <p class="ev-meta"><i class="fas fa-camera"></i>${e.pkg}</p>
+    <div class="ev-foot">
+      <span class="ev-type">${e.type} <small>/ event</small></span>
+      <a class="ev-link" href="#gallery">Lihat foto <i class="fas fa-arrow-up-right-from-square" style="font-size:11px"></i></a>
+    </div>
+  </article>`).join("");
+$("evCount").textContent = `${events.length}+ event di ${new Set(events.map((e) => e.city)).size} kota`;
+
+/* ---- Kipas strip di atas sosmed ---- */
+[
+  { l: 22,  r: -14, w: 48, pal: "p-pink", src: "img/strip-6.jpg" },
+  { l: 76,  r: 0,   w: 54, pal: "p-blue", src: "img/strip-1.jpg" },
+  { l: 134, r: 14,  w: 48, pal: "p-gold", src: "img/strip-4.jpg" }
+].forEach((f) => {
+  const s = makeStrip(f.src, f.pal, f.w);
+  s.style.left = f.l + "px"; s.style.transform = `rotate(${f.r}deg)`; s.style.transformOrigin = "bottom center";
+  $("fan").appendChild(s);
+});
+
+/* ---- Galeri ---- */
+const photos = [
+  { src: "img/strip-1.jpg", cls: "tall" }, { src: "img/strip-3.jpg", cls: "sq" },
+  { src: "img/strip-2.jpg", cls: "sq" },   { src: "img/strip-5.jpg", cls: "tall" },
+  { src: "img/strip-4.jpg", cls: "tall" }, { src: "img/strip-7.jpg", cls: "sq" },
+  { src: "img/strip-6.jpg", cls: "sq" }
+];
+photos.forEach((p, i) => {
+  const b = document.createElement("button");
+  b.className = "shot " + p.cls;
+  b.setAttribute("aria-label", "Buka foto " + (i + 1));
+  const ph = document.createElement("span"); ph.className = "ph";
+  const img = new Image(); img.src = p.src; img.alt = "Foto event " + (i + 1); img.loading = "lazy";
+  img.onerror = () => img.remove();
+  ph.appendChild(img); b.appendChild(ph);
+  b.onclick = () => { $("lbImg").src = p.src; $("lb").classList.add("show"); };
+  $("masonry").appendChild(b);
+});
+const closeLb = () => $("lb").classList.remove("show");
+$("lbClose").onclick = closeLb;
+$("lb").onclick = (e) => { if (e.target.id === "lb") closeLb(); };
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLb(); });
+
+/* ---- Share ---- */
+const url = location.href.split("#")[0];
+$("shareUrl").textContent = url.replace(/^https?:\/\//, "").replace(/\/index\.html$/, "");
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2000); }
+$("shareBtn").onclick = async () => {
+  const data = { title: "Didalam Potret Photobooth", text: "Cek photobooth ini, lucu banget!", url };
+  try {
+    if (navigator.share) { await navigator.share(data); return; }
+    await navigator.clipboard.writeText(url);
+    toast("Link disalin");
+  } catch (e) { if (e.name !== "AbortError") toast("Salin manual: " + url); }
+};
