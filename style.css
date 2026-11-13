@@ -97,12 +97,6 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outlin
   display: flex; flex-direction: column; gap: calc(var(--w) * .07);
   box-shadow: 0 10px 22px rgba(5,10,40,.4);
 }
-.strip .slot { flex: 1; border-radius: 2px; display: block;
-  background:
-    radial-gradient(circle at 50% 36%, rgba(255,255,255,.85) 0 13%, transparent 14%),
-    radial-gradient(ellipse at 50% 100%, rgba(255,255,255,.75) 0 30%, transparent 31%),
-    linear-gradient(160deg, var(--c1), var(--c2)); }
-.strip::after { content: "¶5"; font-family: var(--pop); color: var(--c1); position: absolute; left: 0; right: 0; bottom: calc(var(--w) * .06); text-align: center; font-size: calc(var(--w) * .16); line-height: 1; }
 .strip img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 3px; }
 .p-pink { --c1: #ff8fb0; --c2: #ffe0e8; }
 .p-blue { --c1: #8f98e6; --c2: #dfe1f7; }
@@ -177,22 +171,32 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outlin
 .dots { display: flex; justify-content: center; gap: 6px; margin-top: 4px; }
 .dots i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.3); transition: all .2s; }
 .dots i.on { background: #fff; width: 18px; border-radius: 4px; }
-.sub-title { font-family: var(--head); font-weight: 800; font-size: 22px; margin: 38px 0 4px; }
-.sub-lede { font-size: 12.5px; color: rgba(255,255,255,.7); }
-.formats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
-.fmt { border-radius: 18px; padding: 14px 8px 12px; text-align: center; color: var(--ink); }
-.fmt.f-strip { background: #f9d9d3; } .fmt.f-pass { background: #dfe1f7; } .fmt.f-card { background: #fdf0c0; }
-.fmt-ico { height: 62px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
-.fmt-ico i { display: block; border: 2px solid var(--ink); border-radius: 3px; background: #fff; }
-.f-strip .fmt-ico i { width: 20px; height: 58px; background: linear-gradient(#c0463a 0 22%, #fff 22% 26%, #e8a198 26% 48%, #fff 48% 52%, #c0463a 52% 74%, #fff 74% 78%, #e8a198 78%); }
-.f-pass .fmt-ico i { width: 46px; height: 58px; background: linear-gradient(90deg, transparent 48%, #fff 48% 52%, transparent 52%), #8f98e6; }
-.f-card .fmt-ico i { width: 42px; height: 56px; background: #2a2a2a; }
-.fmt b { display: block; font-size: 13px; }
-.fmt span { display: block; font-size: 10.5px; color: var(--muted); margin-top: 2px; line-height: 1.3; }
-.addon { margin-top: 14px; background: var(--char); border-radius: 20px; padding: 16px 18px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.addon b { font-size: 14px; display: block; }
-.addon small { font-size: 11.5px; color: rgba(255,255,255,.65); }
-.addon strong { font-family: var(--head); font-size: 28px; color: var(--orange); font-weight: 800; letter-spacing: -.5px; }
+/* ---- Pilih format foto: papan kolase ala katalog (datar, tanpa glow/kaca) ---- */
+.sub-block { margin-top: 52px; }
+.sub-block .script { font-size: 32px; }
+.sub-title { font-family: var(--head); font-weight: 800; font-size: 26px; letter-spacing: -.6px; line-height: 1.1; }
+.sub-lede { font-size: 13px; color: rgba(255,255,255,.78); margin-top: 8px; max-width: 36ch; }
+
+.fmt-board { margin-top: 26px; display: grid; gap: 30px; }
+.fmt-row { display: flex; align-items: center; gap: 18px; }
+.fmt-row:nth-child(even) { flex-direction: row-reverse; text-align: right; }
+.fmt-pic { flex: 0 0 46%; display: flex; justify-content: center; align-items: center; min-height: 190px; transform: rotate(-4deg); }
+.fmt-row:nth-child(even) .fmt-pic { transform: rotate(4deg); }
+.fmt-img { max-width: 100%; max-height: 220px; width: auto; height: auto; object-fit: contain; cursor: zoom-in; filter: drop-shadow(4px 5px 0 rgba(0,0,0,.28)); }
+.fmt-pic:has(.fmt-img) .ph { display: none; }
+.ph { display: block; width: 100%; height: 170px; border: 2px dashed rgba(255,255,255,.4); border-radius: 12px; }
+.fmt-txt { flex: 1; min-width: 0; }
+.fmt-name { font-family: var(--head); font-weight: 800; font-size: 30px; line-height: 1; letter-spacing: -.8px; text-transform: uppercase; }
+.fmt-desc { font-size: 13px; color: rgba(255,255,255,.8); margin-top: 8px; line-height: 1.4; }
+.fmt-tag { display: inline-block; margin-top: 12px; background: #0b0b0b; color: #fff; font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 8px; }
+
+.burst { position: relative; width: 168px; height: 168px; margin: 30px auto 6px; transform: rotate(-7deg); }
+.burst svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: #fff; filter: drop-shadow(4px 5px 0 rgba(0,0,0,.28)); }
+.burst-txt { position: relative; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #0b0b0b; text-align: center; line-height: 1; }
+.burst-txt small { font-family: var(--head); font-weight: 800; font-size: 11.5px; letter-spacing: .02em; }
+.burst-txt b { font-family: var(--head); font-weight: 800; font-size: 44px; letter-spacing: -1.5px; margin: 5px 0 4px; }
+
+.label-box.on-navy { margin-top: 26px; }
 .fine { font-size: 11px; color: rgba(255,255,255,.55); margin-top: 12px; }
 
 /* ================= 3. EVENT (kartu simpel) ================= */

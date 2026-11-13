@@ -28,48 +28,16 @@ function waLink(key, arg) {
   return `https://wa.me/${c.number || WA_DEFAULT}?text=${encodeURIComponent(text)}`;
 }
 
-/* ---- Properti: strip foto, polaroid, selotip, paperclip ---- */
-const CLIP = '<svg class="clip" viewBox="0 0 18 42" aria-hidden="true"><path d="M5 30V9a4 4 0 0 1 8 0v24a6 6 0 0 1-12 0V12"/></svg>';
-function loadImg(box, srcs) {
-  const im = new Image(); let i = 0;
-  im.alt = "";
-  im.onerror = () => { i++; if (i < srcs.length) im.src = srcs[i]; else im.remove(); };
-  im.src = srcs[0];
-  box.appendChild(im);
-}
+/* ---- Strip foto (dipakai untuk hiasan di bagian sosmed) ---- */
 function makeStrip(src, pal, w) {
   const s = document.createElement("div");
   s.className = "strip " + pal;
   s.style.setProperty("--w", w + "px");
-  for (let i = 0; i < 4; i++) { const d = document.createElement("i"); d.className = "slot"; s.appendChild(d); }
-  if (src) loadImg(s, [src]);
+  const im = new Image();
+  im.alt = ""; im.onerror = () => s.remove(); im.src = src;   // tidak ada foto = strip tidak ditampilkan
+  s.appendChild(im);
   return s;
 }
-function stripProp(o) {
-  const d = document.createElement("div");
-  d.className = "prop strip-prop";
-  d.style.cssText = `left:${o.l}%; top:${o.t}px; --r:${o.r}deg;`;
-  if (o.deco === "tape") d.insertAdjacentHTML("beforeend", `<span class="tape ${o.tape || ""}"></span>`);
-  if (o.deco === "clip") d.insertAdjacentHTML("beforeend", CLIP);
-  d.appendChild(makeStrip(o.src, o.pal, o.w));
-  return d;
-}
-function polaProp(o) {
-  const d = document.createElement("div");
-  d.className = "prop pola";
-  d.style.cssText = `left:${o.center ? `calc(50% - ${o.w / 2}px)` : o.l + "%"}; top:${o.t}px; width:${o.w}px; --r:${o.r}deg;`;
-  d.innerHTML = `<div class="ph"><i class="sil"></i></div><span class="cap">${o.cap}</span>`;
-  if (o.deco === "tape") d.insertAdjacentHTML("afterbegin", `<span class="tape ${o.tape || ""}"></span>`);
-  if (o.deco === "clip") d.insertAdjacentHTML("beforeend", CLIP);
-  loadImg(d.querySelector(".ph"), o.srcs);
-  return d;
-}
-
-/* ---- Hero: satu foto di tengah (taruh foto pilihanmu di img/header.jpg) ---- */
-$("collage").appendChild(polaProp({
-  center: true, t: 18, w: 232, r: -3, cap: "capture your best vibe",
-  srcs: ["img/header.jpg", "img/photo-1.jpg", "img/strip-1.jpg"], deco: "tape", tape: "pink"
-}));
 
 /* ---- Tombol WhatsApp ---- */
 document.querySelectorAll("[data-chat]").forEach((a) => { a.href = waLink(a.dataset.chat); });
@@ -84,11 +52,17 @@ row.addEventListener("scroll", () => {
 
 /* ---- Event (CONTOH: ganti dengan data asli) ---- */
 const events = [
-  { date: "12 Okt", name: "Wedding Rina & Dimas", place: "Serpong, Tangsel",   city: "Tangsel", type: "Wedding",     pkg: "Golden 5 jam" },
-  { date: "28 Sep", name: "Dies Natalis Kampus",  place: "BSD, Tangsel",       city: "Tangsel", type: "Kampus",      pkg: "Silver 3 jam" },
-  { date: "14 Sep", name: "Gathering Kantor",     place: "Sudirman, Jakarta",  city: "Jakarta", type: "Corporate",   pkg: "Silver 3 jam" },
-  { date: "30 Agu", name: "Bazar Komunitas",      place: "Depok",              city: "Depok",   type: "Bazar",       pkg: "Basic 3 jam" },
-  { date: "09 Agu", name: "Birthday Nadia",       place: "Bintaro",            city: "Bintaro", type: "Ulang tahun", pkg: "Silver 3 jam" }
+  { date: "8 Agustus", name: "SMAN 29 Jakarta", place: "Jakarta",  type: "Partnership",     },
+  { date: "13 Agustus", name: "SMAN 87 Jakarta",  place: "Jakarta",     type: "Partnership",      },
+  { date: "16 Agustus", name: "Lomba 17 Agustus",     place: "Tangerang Selatan", type: "Buy Package",    },
+  { date: "17 Agustus", name: "Karnval Kemerdekaan",      place: "Candi Sawangan",   type: "Partnership",        },
+  { date: "18 Agustus", name: "SMAN 3 Tangerang Selatan",       place: "Tangerang Selatan", type: "Partnership",  },
+  { date: "22 Agustus", name: "Malam Puncak",       place: "Tangerang Selatan", type: "Partnership",  },
+  { date: "29 Agustus", name: "Malam Puncak",       place: "Tangerang Selatan", type: "Partnership",  },
+  { date: "5 September", name: "Wedding",       place: "Venue Djoglo Ageng", type: "Buy Package,  "},
+  { date: "8 September", name: "Mom & Child Clinic",       place: "Gading Serpong", type: "Buy Package,  "},
+  { date: "18 September", name: "Birthday Party",       place: "Tangerang Selatan", type: "Buy Package,  "},
+  { date: "25 September", name: "SMAN 30 Jakarta",       place: "Tangerang Selatan", type: "Buy Package,  "},
 ];
 $("eventList").innerHTML = events.map((e) => `
   <article class="ev-card">
@@ -151,3 +125,11 @@ $("shareBtn").onclick = async () => {
     toast("Link disalin");
   } catch (e) { if (e.name !== "AbortError") toast("Salin manual: " + url); }
 };
+
+/* ---- Sample format foto: tap untuk perbesar ---- */
+document.querySelectorAll(".fmt-img").forEach((im) => {
+  im.addEventListener("click", () => { $("lbImg").src = im.src; $("lb").classList.add("show"); });
+});
+
+/* hiasan strip di sosmed: sembunyikan kalau fotonya belum ada */
+setTimeout(() => { const f = document.getElementById("fan"); if (f && !f.querySelector(".strip")) f.style.display = "none"; }, 1500);
