@@ -52,17 +52,11 @@ row.addEventListener("scroll", () => {
 
 /* ---- Event (CONTOH: ganti dengan data asli) ---- */
 const events = [
-  { date: "8 Agustus", name: "SMAN 29 Jakarta", place: "Jakarta",  type: "Partnership",     },
-  { date: "13 Agustus", name: "SMAN 87 Jakarta",  place: "Jakarta",     type: "Partnership",      },
-  { date: "16 Agustus", name: "Lomba 17 Agustus",     place: "Tangerang Selatan", type: "Buy Package",    },
-  { date: "17 Agustus", name: "Karnval Kemerdekaan",      place: "Candi Sawangan",   type: "Partnership",        },
-  { date: "18 Agustus", name: "SMAN 3 Tangerang Selatan",       place: "Tangerang Selatan", type: "Partnership",  },
-  { date: "22 Agustus", name: "Malam Puncak",       place: "Tangerang Selatan", type: "Partnership",  },
-  { date: "29 Agustus", name: "Malam Puncak",       place: "Tangerang Selatan", type: "Partnership",  },
-  { date: "5 September", name: "Wedding",       place: "Venue Djoglo Ageng", type: "Buy Package,  "},
-  { date: "8 September", name: "Mom & Child Clinic",       place: "Gading Serpong", type: "Buy Package,  "},
-  { date: "18 September", name: "Birthday Party",       place: "Tangerang Selatan", type: "Buy Package,  "},
-  { date: "25 September", name: "SMAN 30 Jakarta",       place: "Tangerang Selatan", type: "Buy Package,  "},
+  { date: "12 Okt", name: "Wedding Rina & Dimas", place: "Serpong, Tangsel",   city: "Tangsel", type: "Wedding",     pkg: "Golden 5 jam" },
+  { date: "28 Sep", name: "Dies Natalis Kampus",  place: "BSD, Tangsel",       city: "Tangsel", type: "Kampus",      pkg: "Silver 3 jam" },
+  { date: "14 Sep", name: "Gathering Kantor",     place: "Sudirman, Jakarta",  city: "Jakarta", type: "Corporate",   pkg: "Silver 3 jam" },
+  { date: "30 Agu", name: "Bazar Komunitas",      place: "Depok",              city: "Depok",   type: "Bazar",       pkg: "Basic 3 jam" },
+  { date: "09 Agu", name: "Birthday Nadia",       place: "Bintaro",            city: "Bintaro", type: "Ulang tahun", pkg: "Silver 3 jam" }
 ];
 $("eventList").innerHTML = events.map((e) => `
   <article class="ev-card">
