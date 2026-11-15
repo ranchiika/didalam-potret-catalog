@@ -265,3 +265,59 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outlin
   * { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ---- FAQ ---- */
+.faq-block { margin-top: 56px; }
+.faq-block .script { font-size: 32px; }
+.faq-list { margin-top: 20px; display: grid; gap: 10px; counter-reset: faq; }
+
+.faq-item {
+  background: #dfe3f0; color: var(--ink);
+  border-radius: 22px; overflow: hidden;
+  transition: background-color .35s ease, box-shadow .35s ease;
+}
+.faq-item.open {
+  background: #fff;
+  box-shadow: inset 4px 0 0 var(--pink), 0 14px 28px rgba(5, 10, 40, .28);
+}
+
+.faq-q {
+  width: 100%; display: flex; align-items: center; gap: 12px; text-align: left;
+  padding: 16px 16px 16px 18px; background: none; border: 0; cursor: pointer;
+  font-family: var(--sans); color: inherit;
+}
+.faq-q:focus-visible { outline: 3px solid var(--pink); outline-offset: -3px; border-radius: 22px; }
+
+.faq-num {
+  flex-shrink: 0; min-width: 42px; padding: 6px 0; border-radius: 20px; text-align: center;
+  font-size: 13px; font-weight: 700; background: #cdd3e4; color: #232a4a;
+  transition: background-color .35s ease, color .35s ease;
+}
+.faq-num::before { counter-increment: faq; content: counter(faq, decimal-leading-zero); }
+.faq-item.open .faq-num { background: var(--ink); color: #fff; }
+
+.faq-text { flex: 1; min-width: 0; font-size: 14.5px; font-weight: 600; line-height: 1.35; color: #2b3350; transition: color .35s ease; }
+.faq-item.open .faq-text { color: #000; }
+
+.faq-chev {
+  flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 11px; background: #cdd3e4; color: #232a4a;
+  transition: transform .35s ease, background-color .35s ease;
+}
+.faq-item.open .faq-chev { transform: rotate(180deg); background: #eceff6; }
+
+/* animasi buka-tutup: tinggi dianimasikan lewat grid 0fr -> 1fr */
+.faq-a {
+  display: grid; grid-template-rows: 0fr; opacity: 0;
+  transition: grid-template-rows .4s cubic-bezier(.4, 0, .2, 1), opacity .3s ease;
+}
+.faq-item.open .faq-a { grid-template-rows: 1fr; opacity: 1; }
+.faq-a-inner { overflow: hidden; min-height: 0; }
+.faq-a-inner p { padding: 0 18px 20px; font-size: 13.5px; line-height: 1.6; color: var(--muted); }
+
+.faq-more { margin-top: 22px; text-align: center; }
+.faq-more p { font-size: 13px; color: rgba(255,255,255,.8); margin-bottom: 12px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-item, .faq-num, .faq-text, .faq-chev, .faq-a { transition: none; }
+}

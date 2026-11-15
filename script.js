@@ -133,3 +133,16 @@ document.querySelectorAll(".fmt-img").forEach((im) => {
 
 /* hiasan strip di sosmed: sembunyikan kalau fotonya belum ada */
 setTimeout(() => { const f = document.getElementById("fan"); if (f && !f.querySelector(".strip")) f.style.display = "none"; }, 1500);
+
+/* ---- FAQ: satu terbuka, klik lagi untuk menutup ---- */
+document.querySelectorAll(".faq-q").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const item = btn.closest(".faq-item");
+    const willOpen = !item.classList.contains("open");
+    document.querySelectorAll(".faq-item.open").forEach((o) => {
+      o.classList.remove("open");
+      o.querySelector(".faq-q").setAttribute("aria-expanded", "false");
+    });
+    if (willOpen) { item.classList.add("open"); btn.setAttribute("aria-expanded", "true"); }
+  });
+});
