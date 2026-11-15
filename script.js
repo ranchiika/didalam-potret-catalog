@@ -2,7 +2,7 @@
    Semua kategori sekarang masuk ke nomor yang sama (WA_DEFAULT).
    Mau pisah nomor per kategori? Isi "number" di kategori itu,
    misalnya number: "62812xxxxxxx". Kosongkan untuk pakai WA_DEFAULT. */
-const WA_DEFAULT = "6282111937898";
+const WA_DEFAULT = "6282111947584";
 const CHAT = {
   event: {
     number: "",
