@@ -318,6 +318,19 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outlin
 .faq-more { margin-top: 22px; text-align: center; }
 .faq-more p { font-size: 13px; color: rgba(255,255,255,.8); margin-bottom: 12px; }
 
+/* ---- Ikon & tombol WhatsApp hijau ---- */
+
+/* 1. Kartu pilihan (Private event / Partnership / Tanya admin) */
+/* 1. Kartu pilihan: panel CHAT jadi hijau penuh */
+.choice-chat { background: #e3f7ea; border-left-color: #9fd9b4; color: #12803a; }
+.choice-chat i { color: #1da851; }
+
+/* 3. Tombol "Tanya paket ini" di pricelist */
+.btn-pkg { background: var(--wa); color: #fff; }
+
+/* 4. Tombol "Tanya admin" & "Booking event" */
+.btn-solid[data-chat] { background: var(--wa); color: #fff; }
+
 @media (prefers-reduced-motion: reduce) {
   .faq-item, .faq-num, .faq-text, .faq-chev, .faq-a { transition: none; }
 }

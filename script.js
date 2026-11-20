@@ -3,22 +3,24 @@
    Mau pisah nomor per kategori? Isi "number" di kategori itu,
    misalnya number: "62812xxxxxxx". Kosongkan untuk pakai WA_DEFAULT. */
 const WA_DEFAULT = "6282111937898";
+const WAVE = "\u{1F44B}"; // 👋
+
 const CHAT = {
   event: {
     number: "",
-    text: "Halo Didalam Potret! 👋\nSaya mau sewa photobooth untuk *private event*.\n\nJenis acara:\nTanggal:\nLokasi:\nJumlah tamu:\nPaket yang diminati:"
+    text: `Halo Didalam Potret! ${WAVE}\nSaya mau sewa photobooth untuk *private event*.\n\nJenis acara:\nTanggal:\nLokasi:\nJumlah tamu:\nPaket yang diminati:`
   },
   partner: {
     number: "",
-    text: "Halo Didalam Potret! 👋\nSaya tertarik untuk *kerja sama / partnership*.\n\nNama brand / instansi:\nBentuk kolaborasi:\nTanggal / periode:"
+    text: `Halo Didalam Potret! ${WAVE}\nSaya tertarik untuk *kerja sama / partnership*.\n\nNama brand / instansi:\nBentuk kolaborasi:\nTanggal / periode:`
   },
   admin: {
     number: "",
-    text: "Halo Didalam Potret! 👋\nSaya mau tanya-tanya dulu ke admin."
+    text: `Halo Didalam Potret! ${WAVE}\nSaya mau tanya-tanya dulu ke admin.`
   },
   package: {
     number: "",
-    text: (nama) => `Halo Didalam Potret! 👋\nSaya mau tanya ketersediaan jadwal untuk *Paket ${nama}*.\n\nTanggal acara:\nLokasi:`
+    text: (nama) => `Halo Didalam Potret! ${WAVE}\nSaya mau tanya ketersediaan jadwal untuk *Paket ${nama}*.\n\nTanggal acara:\nLokasi:`
   }
 };
 const $ = (id) => document.getElementById(id);
